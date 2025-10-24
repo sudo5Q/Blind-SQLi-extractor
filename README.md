@@ -22,6 +22,6 @@ python3 pwntools_feedback_extractor.py \
   --insecure          # if the site uses a self-signed cert
   
 # What to edit (config)
- - SUCCESS_MARKER:
+ - SUCCESS_MARKER:\
    The substring that reliably appears only on a successful insert.
 
