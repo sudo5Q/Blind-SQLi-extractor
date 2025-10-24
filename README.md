@@ -24,4 +24,28 @@ python3 pwntools_feedback_extractor.py \
 # What to edit (config)
  - SUCCESS_MARKER:\
    The substring that reliably appears only on a successful insert.
+   - Default: "Thanks for the feedback".
+   - Change it to a page-specific string (e.g., "Success", "Saved", "OK").
+   - You can also switch to a more robust check (see “Choosing the success signal” below).
+ - URL: The POST endpoint that accepts the feedback (often /).
+ - session cookie: Replace with your valid authenticated cookie value.
+ - CHARSET: Characters to try for each position (defaults to digits, A–Z, a–z, {, }, _). Add/remove symbols as needed.
+ - MAX_LEN: Safety cap for maximum characters to brute force.
+ - --insecure : TLS/Proxy settings for CTF labs.
 
+# Choosing the success signal (very important)
+If the target doesn’t literally print a success string, pick another stable oracle and update the script’s check accordingly:
+ - Body substring (default): Set SUCCESS_MARKER to a unique success-only phrase.
+ - HTTP status: Treat 2xx as success; modify the script to check r.status_code.
+ - Content-Length delta: Compare len(r.text) or a header like Content-Length.
+ - Regex: Match a specific HTML fragment (e.g., a CSS class that only appears on success).
+
+
+# Troubleshooting
+ - CERT errors: Use --insecure or import the lab CA certificate.
+ - WAF/rate-limit: Increase --delay, add retries, or reduce concurrency.
+ - No visible difference: Re-check your oracle; try status code or length checks.
+ - Blacklists: Avoid banned keywords; the provided payload uses no WHERE/UNION/LIKE.
+
+# Legal
+ - For educational use in authorized labs/CTFs only. Do not target systems you don’t own or have explicit permission to test.
